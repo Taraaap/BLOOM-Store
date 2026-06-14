@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGet.Packaging" Version="7.6.0" />
+    <PackageReference Include="NuGet.Protocol" Version="7.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BLOOM.DataAccess\BLOOM.DataAccess.csproj" />
+    <ProjectReference Include="..\BLOOM.Models\BLOOM.Models.csproj" />
+    <ProjectReference Include="..\BLOOM.Utility\BLOOM.Utility.csproj" />
+  </ItemGroup>
+
+</Project>

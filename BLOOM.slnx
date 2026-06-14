@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BLOOM.Business/BLOOM.Business.csproj" />
+  <Project Path="BLOOM.DataAccess/BLOOM.DataAccess.csproj" />
+  <Project Path="BLOOM.Models/BLOOM.Models.csproj" />
+  <Project Path="BLOOM.Utility/BLOOM.Utility.csproj" />
+  <Project Path="BLOOM/BLOOM.csproj" />
+</Solution>
