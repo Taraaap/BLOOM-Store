@@ -27,7 +27,7 @@ function loadDataTable(status) {
         columns: [
 
             { data: 'id', width: "5%" },
-            { data: 'name', width: "20%" },
+            { data: 'name', width: "15%" },
             { data: 'phoneNumber', width: "15%" },
             { data: 'applicationUser.email', width: "20%" },
             {
@@ -45,7 +45,7 @@ function loadDataTable(status) {
 
             {
 
-                data: 'id', width: "10%", "render": function (data) {
+                data: 'id', width: "15%", "render": function (data) {
                     return `<div class="d-flex gap-2 justify-content-end">
                 <a href="/admin/order/details?orderId=${data} "class="btn btn-sm btn-outline-success">
                 <i class="bi bi-pencil-square"></i>Details

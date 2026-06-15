@@ -18,5 +18,8 @@ namespace BLOOM.Utility
         public const string StatusCancelled = "Cancelled";
         public const string StatusRefuned = "Refunded";
 
+
+        public const string SessionCart = "SessionShoppingCartBloom";
+
     }
 }

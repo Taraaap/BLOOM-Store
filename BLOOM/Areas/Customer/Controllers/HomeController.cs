@@ -1,5 +1,6 @@
 using BLOOM.Business.Services.IServices;
 using BLOOM.Models;
+using BLOOM.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -59,6 +60,10 @@ namespace BLOOM.Areas.Customers.Controllers
 
             shoppingCart.ApplicationUserId = userId;
             await _shoppingCartServices.AddToCartAsync(shoppingCart);
+
+            //Cart item Count
+            var count = await _shoppingCartServices.GetCartCountItemsAsync(userId);
+            HttpContext.Session.SetInt32(SD.SessionCart, count);
 
             TempData["success"] = "Item added to cart";
             return RedirectToAction("Index");

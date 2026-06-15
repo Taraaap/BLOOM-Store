@@ -1,4 +1,5 @@
-﻿using BLOOM.Models;
+﻿using BLOOM.Business.Services.IServices;
+using BLOOM.Models;
 using BLOOM.Models.ViewModels;
 using BLOOM.Utility;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +16,16 @@ namespace BLOOM.Areas.Identity.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IShoppingCartServices _shoppingCartServices;
 
 
-        public AccountController(UserManager <ApplicationUser> userManager,
-            SignInManager<ApplicationUser>signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IShoppingCartServices shoppingCartServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _shoppingCartServices = shoppingCartServices;
 
 
         }
@@ -42,13 +45,15 @@ namespace BLOOM.Areas.Identity.Controllers
             {
                 var result = await _signInManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: false);
 
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
+
 
                     //Redirect to returnURL if valid, otherwise go home
-                    if(!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        {
-                         return Redirect(returnUrl);
-                        }
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
 
                     return RedirectToAction("Index", "Home", new { area = "Customer" });
                 }
@@ -56,7 +61,9 @@ namespace BLOOM.Areas.Identity.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return View();
-        }
+        
+    
+}
 
 
 
@@ -127,6 +134,7 @@ namespace BLOOM.Areas.Identity.Controllers
 
                     //user has been created 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    HttpContext.Session.SetInt32(SD.SessionCart, 0);
 
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
@@ -156,6 +164,8 @@ namespace BLOOM.Areas.Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            HttpContext.Session.SetInt32(SD.SessionCart, 0);
+
             return RedirectToAction("Index", "Home", new { area = "Customer" });
 
         }

@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options=>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;                   //Must have at least one number(0-9)
     options.Password.RequireLowercase = true;               //Must have at least one lowercase letter(a-z)
@@ -29,19 +29,23 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>( options=>
     options.Password.RequiredLength = 6;                    //Must have minimum 6 character
     options.Password.RequiredUniqueChars = 1;              //Must have 1 unique character
 
-
-
-})
+}).AddDefaultTokenProviders()
     
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-    
+    .AddEntityFrameworkStores<ApplicationDbContext>();   
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IShoppingCartServices, ShoppingCartService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly= true;
+    options.Cookie.IsEssential= true;
+});
 
 builder.Services.Configure<FormOptions>(options =>
 {
@@ -73,6 +77,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

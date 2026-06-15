@@ -1,24 +1,25 @@
 ﻿var productDataTable;
 
 $(document).ready(function () {
-    productDataTable();
+    loadDataTable();
 })
 
-productDataTable=$('#tblData').DataTable({
-    ajax: '/admin/product/getall',
-    columns: [
-        
-        { data: 'title', width:"25%" }, 
-        { data: 'sku', width: "15%" },
-        { data: 'price', width: "10%", "render": function (data) { return 'Rs ' + data.toFixed(2); } }, 
-        { data: 'brand', width: "15%" }, 
-        {
-        data: 'category.name', width: "10%", "render": function (data)
-            { return '<span class="badge bg-secondary">' + data + '</span>'; }}, 
-        {
-        data: 'id', width: "25%", "render": function (data)
+
+function loadDataTable() {
+    productDataTable = $('#tblData').DataTable({
+        ajax: '/admin/product/getall',
+        columns: [
+
+            { data: 'title', width: "25%" },
+            { data: 'sku', width: "15%" },
+            { data: 'price', width: "10%", "render": function (data) { return 'Rs ' + data.toFixed(2); } },
+            { data: 'brand', width: "15%" },
             {
-                return `<div class="d-flex gap-2 justify-content-end">
+                data: 'category.name', width: "10%", "render": function (data) { return '<span class="badge bg-secondary">' + data + '</span>'; }
+            },
+            {
+                data: 'id', width: "25%", "render": function (data) {
+                    return `<div class="d-flex gap-2 justify-content-end">
                 <a href="/admin/product/upsert?id=${data} "class="btn btn-sm btn-outline-success">
                 <i class="bi bi-pencil-square"></i>Edit
                 </a>
@@ -28,13 +29,13 @@ productDataTable=$('#tblData').DataTable({
                 </a>
 
                 </div>`;
-            }
-        },
+                }
+            },
 
 
-    ]
-});
-
+        ]
+    });
+}
 function Delete (url){
     Swal.fire({
         title: "Are you sure?",

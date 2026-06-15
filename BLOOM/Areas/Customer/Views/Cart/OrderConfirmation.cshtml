@@ -14,7 +14,7 @@
                 <p class="text-uppercase fw-semibold mb-0" style="font-size: 0.65rem; letter-spacing: 0.1em;">Order Number</p>
             </div>
             <div class="card-body py-4">
-                <span class="display-6 fw-bold" style="color: #17A34A;">@Model</span>
+                <span class="display-6 fw-bold" style="color: #17A34A;">X123456789X @Model XX</span>
             </div>
             <div class="card-footer bg-light">
                 <div class="d-flex justify-content-center gap-4 small text-secondary">
@@ -25,10 +25,10 @@
         </div>
 
         <div class="d-grid gap-2">
-            <a href="#" class="btn text-white fw-semibold" style="background: #17A34A;">
+            <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="btn text-white fw-semibold" style="background: #17A34A;">
                 <i class="bi bi-box me-1"></i> View My Orders
             </a>
-            <a href="#" class="btn btn-outline-secondary fw-semibold">
+            <a  asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary fw-semibold">
                 <i class="bi bi-house me-1"></i> Continue Shopping
             </a>
         </div>

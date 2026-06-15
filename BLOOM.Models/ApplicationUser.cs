@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BLOOM.Models
@@ -16,6 +17,9 @@ namespace BLOOM.Models
 
         public string? State { get; set; }
         public string? PostalCode { get; set; }
+
+        [NotMapped]
+        public string Role {  get; set; }
 
 
     }
