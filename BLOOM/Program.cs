@@ -1,6 +1,7 @@
 using BLOOM.Business.Services;
 using BLOOM.Business.Services.IServices;
 using BLOOM.DataAccess.Data;
+using BLOOM.DataAccess.DbInitilizer;
 using BLOOM.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +39,8 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IShoppingCartServices, ShoppingCartService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IApplicationUserService, ApplicationUserService>();
+builder.Services.AddScoped<IDbInitializer,DbInitilizer>();
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -85,6 +88,8 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+await SeedDatabase();
+
 app.MapControllerRoute(
     name: "MyArea",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}")
@@ -99,3 +104,13 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+
+async Task SeedDatabase()
+{
+    using(var scope= app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        await dbInitializer.InitializeAsync();
+    }
+}

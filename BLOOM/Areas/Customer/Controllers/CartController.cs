@@ -99,11 +99,15 @@ namespace BLOOM.Areas.Customers.Controllers
             //Create order
             await _orderService.CreateOrderAsync(shoppingCartVM.OrderHeader);
 
+
             try
             {
                 var domain = Request.Scheme + "://" + Request.Host.Value + "/";
 
                 var sessionUrl= await _orderService.CreateStripeCheckoutSessionAsync(shoppingCartVM.OrderHeader, shoppingCartVM.ShoppingCartList, domain);
+
+                await _shoppingCartServices.ClearCartAsync(userId);
+                HttpContext.Session.SetInt32(SD.SessionCart, 0);
 
                 Response.Headers.Append("Location", sessionUrl);
                 return new StatusCodeResult(303);

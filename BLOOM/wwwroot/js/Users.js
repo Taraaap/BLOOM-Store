@@ -9,12 +9,12 @@ function loadDataTable() {
         ajax: '/admin/user/getall',
         columns: [
 
-            { data: 'name', width: "15%" },
+            { data: 'name', width: "10%" },
             { data: 'email', width: "15%" },
             { data: 'phoneNumber', width: "10%" },
             
             {
-                data: 'role', width: "10%", "render": function (data) { return '<span class="badge bg-secondary">' + data + '</span>'; }
+                data: 'role', width: "8%", "render": function (data) { return '<span class="badge bg-secondary">' + data + '</span>'; }
             },
             {
                 data: { id: "id", lockoutEnd: "lockoutEnd" }, width: "25%", "render": function (data) {
