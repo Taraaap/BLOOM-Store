@@ -95,12 +95,30 @@ namespace BLOOM.Areas.Admin.Controllers
                     successMessage = "Oder Processign started successfully";
                     break;
                 case SD.StatusCancelled:
-                    await _orderService.UpdateOrderStatusAsync(OrderHeader.Id, status);
-                    successMessage = "Oder Cancelled started successfully";
-                    break;
                 case SD.StatusRefuned:
-                    await _orderService.UpdateOrderStatusAsync(OrderHeader.Id, status);
-                    successMessage = "Oder Refunded started successfully";
+                    try
+                    {
+                        bool refundIssued = await _orderService.CancelOrderWithRefundAsync(OrderHeader.Id);
+                        if (refundIssued)
+                        {
+                            successMessage = "Order cancelled and refund issued succesfully. Funds will be returned to customer within 5-10 business day.";
+                        }
+                        else
+                        {
+                            successMessage = "Order cancelled successfully.(No payment was processed)";
+                        }
+                    }catch(InvalidOperationException ex)
+                    {
+                        // Business rule violation(e.g., trying to cancel shipped order)
+                        TempData["error"] = ex.Message;
+                        return RedirectToAction(nameof(Details), new { orderId = OrderHeader.Id });
+                    }catch(Stripe.StripeException ex)
+                    {
+                        // Refund failed- order is stil cancelled but admin needs to manually refund
+                        TempData["error"] = $"Order cancelled but refund failed:{ex.Message}.please process refund manually in stripe dashboard";
+                        return RedirectToAction(nameof(Details), new { orderId = OrderHeader.Id });
+                    }
+
                     break;
                 case SD.StatusShipped:
 

@@ -46,9 +46,9 @@
 
                     <div class="d-flex align-items-baseline gap-2 mb-4">
                         
-                        <span class="h3 fw-bold mb-0" style="color: #17A34A;">Rs @Model.Price.ToString("N2")</span>
+                        <span class="h3 fw-bold mb-0" style="color: #17A34A;"> @Model.Price.ToString("c")</span>
                         
-                        <span class="text-decoration-line-through text-secondary">Rs @Model.Product.ListPrice.ToString("N2")</span>
+                        <span class="text-decoration-line-through text-secondary"> @Model.Product.ListPrice.ToString("c")</span>
                     </div>
 
                     <!-- Volume Discounts -->
@@ -61,14 +61,14 @@
                                 <div class="bg-white border rounded p-2 shadow-sm h-100 d-flex flex-column align-items-center justify-content-center">
                                     <p class="text-uppercase text-secondary mb-1" style="font-size: 0.6rem; font-weight: 700;">1-2 Bottles</p>
                                     
-                                    <p class="fw-bold mb-0" style="color: #17A34A;">Rs @Model.Product.Price.ToString("N2")</p>
+                                    <p class="fw-bold mb-0" style="color: #17A34A;"> @Model.Product.Price.ToString("c")</p>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="bg-white border rounded p-2 shadow-sm h-100 d-flex flex-column align-items-center justify-content-center" style="border-color: rgba(23,163,74,0.3) !important;">
                                     <p class="text-uppercase text-secondary mb-1" style="font-size: 0.6rem; font-weight: 700;">3-9 Bottles</p>
                                     
-                                    <p class="fw-bold mb-0" style="color: #17A34A;">Rs @Model.Product.Price50.ToString("N2")</p>
+                                    <p class="fw-bold mb-0" style="color: #17A34A;"> @Model.Product.Price50.ToString("c")</p>
                                     <span class="badge mt-1" style="font-size: 0.55rem; background: rgba(23,163,74,0.1); color: #17A34A;">SAVE</span>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                 <div class="bg-white border rounded p-2 shadow-sm h-100 d-flex flex-column align-items-center justify-content-center" style="border-color: #17A34A !important;">
                                     <p class="text-uppercase text-secondary mb-1" style="font-size: 0.6rem; font-weight: 700;">10+ Bottles</p>
                                     
-                                    <p class="fw-bold mb-0" style="color: #17A34A;">Rs @Model.Product.Price100.ToString("N2")</p>
+                                    <p class="fw-bold mb-0" style="color: #17A34A;"> @Model.Product.Price100.ToString("c")</p>
                                     <span class="badge text-white mt-1" style="font-size: 0.55rem; background: #17A34A;">BEST</span>
                                 </div>
                             </div>

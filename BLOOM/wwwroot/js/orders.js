@@ -41,7 +41,7 @@ function loadDataTable(status) {
                     return '<span style="display:inline-flex;align-items:center;font-size:12px;font-weight:500;padding:3px 10px;border-radius:4px;background:' + bg + ';color:' + fg + '">' + data + '</span>';
                 }
             },
-            { data: 'orderTotal', width: "15%", "render": function (data) { return 'Rs ' + data.toFixed(2); } },
+            { data: 'orderTotal', width: "15%", "render": function (data) { return '$ ' + data.toFixed(2); } },
 
             {
 

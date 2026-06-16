@@ -49,10 +49,10 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     
-                                    <span class="fw-bold text-success">Rs @product.Price100.ToString("N2")</span>
+                                    <span class="fw-bold text-success"> @product.Price100.ToString("c")</span>
                                     @if (product.ListPrice > product.Price100)
                                     {
-                                        <small class="text-decoration-line-through text-muted ms-1"> Rs @product.ListPrice.ToString("N2")</small>
+                                        <small class="text-decoration-line-through text-muted ms-1">  @product.ListPrice.ToString("c")</small>
                                     }
                                 </div>
 

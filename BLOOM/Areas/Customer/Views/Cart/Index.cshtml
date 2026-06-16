@@ -15,7 +15,7 @@
 
         <div class="row g-4 align-items-start">
 
-            <!-- ============ LEFT: Items ============ -->
+           
             <div class="col-lg-7">
                 <div class="card border shadow-sm overflow-hidden">
                     <div class="card-header text-white d-flex align-items-center justify-content-between py-3 px-4" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
@@ -33,7 +33,7 @@
                         @foreach(var item in Model.ShoppingCartList)
                             {
                             <div class="d-flex gap-3 px-4 py-3 border-bottom cart-item">
-                                <!-- Thumbnail -->
+                                
                                 <a href="#" class="flex-shrink-0">
                                     <div class="rounded overflow-hidden" style="width: 56px; height: 72px;">
                                         @if(!string.IsNullOrEmpty(item.Product.ImageUrl))
@@ -52,7 +52,7 @@
                                     <a href="#" class="fw-semibold text-decoration-none d-block text-truncate" style="font-size: 0.85rem;">
                                        @item.Product.Title
                                     </a>
-                                    <p class="text-secondary mb-2" style="font-size: 0.7rem;">by @item.Product.Brand &middot;Rs @item.Price.ToString("N2") each</p>
+                                    <p class="text-secondary mb-2" style="font-size: 0.7rem;">by @item.Product.Brand &middot; @item.Price.ToString("c") each</p>
 
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="input-group" style="width: 130px;">
@@ -66,9 +66,9 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Price + Remove -->
+                                
                                 <div class="text-end flex-shrink-0 d-flex flex-column justify-content-between align-self-stretch">
-                                    <span class="fw-bold" style="font-size: 0.9rem;">Rs @((item.Price * item.Count).ToString("N2"))</span>
+                                    <span class="fw-bold" style="font-size: 0.9rem;"> @((item.Price * item.Count).ToString("c"))</span>
                                     <a asp-action="Remove" asp-route-cartId="@item.Id" class="text-danger text-decoration-none d-inline-flex align-items-center gap-1" style="font-size: 0.7rem;">
                                         <i class="bi bi-trash3"></i> Remove
                                     </a>
@@ -85,12 +85,12 @@
                 </div>
             </div>
 
-            <!-- ============ RIGHT: Checkout sidebar ============ -->
+           
             <div class="col-lg-5">
                 <div class="position-lg-sticky" style="top: 80px;">
                     <div class="card border shadow-sm overflow-hidden">
 
-                        <!-- Shipping -->
+                       
                         <div class="px-4 pt-4 pb-3">
                             <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
                                 <i class="bi bi-file-person" style="color: #17A34A;"></i> Name and Phone Number
@@ -131,7 +131,7 @@
 
                         <hr class="my-0 mx-4" />
 
-                        <!-- Summary -->
+                       
                         <div class="px-4 py-3">
                             <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
                                 <i class="bi bi-receipt" style="color: #17A34A;"></i> Order Summary
@@ -141,7 +141,7 @@
                                 
                                         <div class="d-flex justify-content-between mb-1" style="font-size: 0.8rem;">
                                         <span class="text-secondary text-truncate me-2">@item.Product.Title &times; 1</span>
-                                    <span class="fw-medium flex-shrink-0">Rs @((item.Price * item.Count).ToString("N2"))</span>
+                                    <span class="fw-medium flex-shrink-0"> @((item.Price * item.Count).ToString("c"))</span>
                                     </div>
                                 }
                             <hr class="my-2" />
@@ -151,13 +151,13 @@
                             </div>
                         </div>
 
-                        <!-- Total bar -->
+                      
                         <div class="d-flex justify-content-between align-items-center px-4 py-3 text-white" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
                             <span class="text-uppercase fw-semibold small">Total</span>
-                            <span class="fw-bold fs-5">Rs @Model.OrderHeader.OrderTotal.ToString("N2")</span>
+                            <span class="fw-bold fs-5"> @Model.OrderHeader.OrderTotal.ToString("c")</span>
                         </div>
 
-                        <!-- Place Order -->
+                       
                         <div class="p-4">
                             <button type="submit" class="btn btn-accent w-100 fw-semibold py-2 d-flex align-items-center justify-content-center gap-2">
                                 <i class="bi bi-lock"></i> Place Order

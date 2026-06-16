@@ -216,17 +216,17 @@
                                             <p class="fw-medium small mb-0">@details.Product.Title</p>
                                             
                                             <p class="text-secondary mb-0" style="font-size: 0.75rem;">
-                                             Rs   @details.Price.ToString("N2") * @details.Count
+                                                @details.Price.ToString("c") * @details.Count
                                             </p>
                                         </div>
                                         <p class="fw-semibold small mb-0" style="color: #17A34A;">
-                                        Rs   @((details.Price * @details.Count).ToString("N2"))
+                                       @((details.Price * @details.Count).ToString("c"))
                                         </p>
                                     </div>
                                 }
                                 <div class="d-flex justify-content-between align-items-center p-3 text-white" style="background: linear-gradient(to right, #065f46, #282828, #191414);">
                                 <span class="fw-bold small text-uppercase">Total</span>
-                                <span class="fw-bold fs-5">Rs @Model.OrderTotal.ToString("N2")</span>
+                                <span class="fw-bold fs-5"> @Model.OrderTotal.ToString("c")</span>
                                 
                             </div>
                         </div>
@@ -236,19 +236,19 @@
                                     @if (Model.OrderStatus == SD.StatusApproved)
                                     {
                                         <button type="submit" asp-action="UpdateOrderStatus" asp-route-status="@SD.StatusInProcess" class="btn btn-accent fw-semibold">
-                                            Start Processing
+                                        <i class="bi bi-arrow-right-circle me-1"></i>     Start Processing
                                         </button>
                                     }
                                     @if (Model.OrderStatus == SD.StatusInProcess)
                                     {
                                         <button type="submit" asp-action="UpdateOrderStatus" asp-route-status="@SD.StatusShipped" onclick="return validateInput()" class="btn btn-warning fw-semibold">
-                                            Ship Order
+                                        <i class="bi bi-truck me-1"></i>    Ship Order
                                         </button>
                                     }
-                                    @if (Model.OrderStatus != SD.StatusRefuned && Model.OrderStatus != SD.StatusCancelled && Model.OrderStatus != SD.StatusShipped)
+                                    @if (Model.OrderStatus == SD.StatusApproved || Model.OrderStatus == SD.StatusInProcess )
                                     {
                                         <button asp-action="UpdateOrderStatus" asp-route-status="@SD.StatusCancelled" type="submit" class="btn btn-danger fw-semibold">
-                                            Cancel Order
+                                          <i class="bi bi-x-circle me-1"></i>  Cancel Order
                                         </button>
                                     }
                                 </div>
